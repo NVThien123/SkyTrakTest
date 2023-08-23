@@ -1,0 +1,30 @@
+{
+  "name": "com.jbooth.microsplat.digger",
+  "displayName": "MicroSplat-Digger",
+  "version": "3.9.0",
+  "author": {
+    "name": "Jason Booth",
+    "email": "slipster216@gmail.com",
+    "url": "http://jdbtechservices.com/"
+  },
+  "unity": "2019.4",
+  "samples": [
+    {
+      "displayName": "Decals Integration Example",
+      "description": "Example of Digger integration module",
+      "path": "Samples~/Digger"
+    }
+  ],
+  "dependencies": {
+    "com.jbooth.microsplat.core": "3.9.0"
+  },
+  "description": "The module allows the output of custom shaders which can be used by Diggger for digger surfaces.",
+  "keywords": [
+    "MicroSplat",
+    "Terrain",
+    "Shader",
+    "Digger"
+  ],
+  "documentationUrl": "https://docs.google.com/document/d/1r9a4VL9_Ge6Hr8KlQ7yrmvVZG6GSiDeKPEX1hYZs1m0/edit?usp=sharing",
+  "type": "tool"
+}
