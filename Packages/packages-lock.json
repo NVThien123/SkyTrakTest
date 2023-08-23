@@ -38,6 +38,14 @@
         "com.jbooth.microsplat.core": "3.9.0"
       }
     },
+    "com.jbooth.microsplat.urp2022": {
+      "version": "file:com.jbooth.microsplat.urp2022",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {
+        "com.jbooth.microsplat.core": "3.9.0"
+      }
+    },
     "com.unity.ai.navigation": {
       "version": "1.1.4",
       "depth": 0,

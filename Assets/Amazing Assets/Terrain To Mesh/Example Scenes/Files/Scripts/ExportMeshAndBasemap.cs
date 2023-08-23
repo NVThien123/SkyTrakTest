@@ -13,8 +13,17 @@ namespace AmazingAssets.TerrainToMesh.Example
         public int vertexCountVertical = 100;
 
         [Space(10)]
+        public bool enableHeightBasedBlend = false;
+        [Range(0f, 1f)]
+        public float heightTransition = 0;
+
+        [Space(10)]
         public bool exportHoles = false;
         public int mapsResolution = 512;
+
+        [Space(10)]
+        public Shader defaultShader;
+        public Shader cutoutShader;
 
 
         void Start()
@@ -34,37 +43,25 @@ namespace AmazingAssets.TerrainToMesh.Example
 
             //2. Export basemap textures////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            Texture2D diffuseTexture = terrainData.TerrainToMesh().ExportBasemapDiffuseTexture(mapsResolution, exportHoles, false);  //Basemaps's alpha channel contains holesmap, if 'exportHoles' is enabled
-            Texture2D normalTexture = terrainData.TerrainToMesh().ExportBasemapNormalTexture(mapsResolution, false);
+            Texture2D diffuseTexture = terrainData.TerrainToMesh().ExportBasemapDiffuseTexture(mapsResolution, exportHoles, false, enableHeightBasedBlend, heightTransition);  //Basemap's alpha channel contains holesmap, if 'exportHoles' is enabled
+            Texture2D normalTexture = terrainData.TerrainToMesh().ExportBasemapNormalTexture(mapsResolution, false, enableHeightBasedBlend, heightTransition);
 
-            Texture2D maskTexture = terrainData.TerrainToMesh().ExportBasemapMaskTexture(mapsResolution, false);       //Contains metallic(R), occlusion(G) and smoothness(A)
-
+            Texture2D maskTexture = terrainData.TerrainToMesh().ExportBasemapMaskTexture(mapsResolution, false, enableHeightBasedBlend, heightTransition);       //Contains metallic(R), occlusion(G) and smoothness(A)
 
 
             //3. Create material and assign exported basemaps/////////////////////////////////////////////////////////////////////////////////////////////////
 
-            Material material = new Material(Shader.Find("Standard"));
+            Material material = new Material(exportHoles ? cutoutShader : defaultShader);
 
 
-            material.SetTexture("_MainTex", diffuseTexture);    //Prop names are defined inside shader
+            material.SetTexture("_MainTex", diffuseTexture);    //Prop names are defined inside used shader
             material.SetTexture("_BumpMap", normalTexture);
+
 
             if (maskTexture != null)
             {
-                material.SetTexture("_MetallicGlossMap", maskTexture);
-                material.EnableKeyword("_METALLICGLOSSMAP");
-            }
-
-            if(normalTexture != null)
-            {
-                material.EnableKeyword("_NORMALMAP");
-            }
-
-
-            if(exportHoles)
-            {
-                material.SetFloat("_Mode", 1);
-                material.EnableKeyword("_ALPHATEST_ON");
+                material.SetTexture("_Mask", maskTexture);
+                material.SetFloat("_Smoothness", 1);
             }
 
 

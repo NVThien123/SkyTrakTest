@@ -12,20 +12,24 @@ namespace AmazingAssets.TerrainToMesh.Example
         public int vertexCountHorizontal = 100;
         public int vertexCountVertical = 100;
 
+        [Space(10)]
+        public bool enableHeightBasedBlend = false;
+        [Range(0f, 1f)]
+        public float heightTransition = 0;
 
         [Space(10)]
         public bool exportHoles = false;
         public int mapsResolution = 512;
-              
 
         [Header("Chunk count is 4x4")]
         [Range(0, 3)]
         public int positionX;
-
         [Range(0, 3)] 
         public int positionY;
 
-
+        [Space(10)]
+        public Shader defaultShader;
+        public Shader cutoutShader;
 
 
         int chunkCountHorizontal = 4;
@@ -49,40 +53,26 @@ namespace AmazingAssets.TerrainToMesh.Example
 
             //2. Export basemap textures by position///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            Texture2D diffuseTexture = terrainData.TerrainToMesh().ExportBasemapDiffuseTexture(mapsResolution, chunkCountHorizontal, chunkCountVertical, positionX, positionY, exportHoles, false);  //alpha channel will contain holesmap
-            Texture2D normalTexture = terrainData.TerrainToMesh().ExportBasemapNormalTexture(mapsResolution, chunkCountHorizontal, chunkCountVertical, positionX, positionY, false);
+            Texture2D diffuseTexture = terrainData.TerrainToMesh().ExportBasemapDiffuseTexture(mapsResolution, chunkCountHorizontal, chunkCountVertical, positionX, positionY, exportHoles, false, enableHeightBasedBlend, heightTransition);  //Basemap's alpha channel contains holesmap, if 'exportHoles' is enabled
+            Texture2D normalTexture = terrainData.TerrainToMesh().ExportBasemapNormalTexture(mapsResolution, chunkCountHorizontal, chunkCountVertical, positionX, positionY, false, enableHeightBasedBlend, heightTransition);
             
-            Texture2D maskTexture = terrainData.TerrainToMesh().ExportBasemapMaskTexture(mapsResolution, chunkCountHorizontal, chunkCountVertical, positionX, positionY, false);       //contains metallic(R), occlusion(G) and smoothness(A)
+            Texture2D maskTexture = terrainData.TerrainToMesh().ExportBasemapMaskTexture(mapsResolution, chunkCountHorizontal, chunkCountVertical, positionX, positionY, false, enableHeightBasedBlend, heightTransition);       //Contains metallic(R), occlusion(G) and smoothness(A)
 
 
 
             //3. Create material and assign exported basemaps/////////////////////////////////////////////////////////////////////////////////////////////////
 
-            Material material = new Material(Shader.Find("Standard"));
+            Material material = new Material(exportHoles ? cutoutShader : defaultShader);
 
 
-            material.SetTexture("_MainTex", diffuseTexture);    //Prop names are defined inside shader
+            material.SetTexture("_MainTex", diffuseTexture);    //Prop names are defined inside used shader
             material.SetTexture("_BumpMap", normalTexture);
 
             if (maskTexture != null)
             {
-                material.SetTexture("_MetallicGlossMap", maskTexture);
-                material.EnableKeyword("_METALLICGLOSSMAP");
+                material.SetTexture("_Mask", maskTexture);
+                material.SetFloat("_Smoothness", 1);
             }
-
-
-            if (normalTexture != null)
-            {
-                material.EnableKeyword("_NORMALMAP");
-            }
-
-
-            if (exportHoles)
-            {
-                material.SetFloat("_Mode", 1);
-                material.EnableKeyword("_ALPHATEST_ON");
-            }
-
 
             GetComponent<Renderer>().sharedMaterial = material;
         }

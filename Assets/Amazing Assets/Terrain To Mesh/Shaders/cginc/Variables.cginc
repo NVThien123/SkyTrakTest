@@ -2,91 +2,99 @@
 #define TERRAIN_TO_MESH_VARIABLES_CGINC
 
 
+#if defined(TERRAIN_TO_MESH_BUILTIN_SAMPLER)
+    SamplerState Sampler_Linear_Repeat;
+    SamplerState Sampler_Linear_Clamp;
 
-//Layer Count/////////////////////////////////////////////////////////////////////////////
-int _T2M_Layer_Count;
-
-//Holes///////////////////////////////////////////////////////////////////////////////////
-#if defined(_ALPHATEST_ON)
-    UNITY_DECLARE_TEX2D(_T2M_HolesMap); 
+    #define BUILTIN_SAMPLER_REPEAT   Sampler_Linear_Repeat
+    #define BUILTIN_SAMPLER_CLAMP    Sampler_Linear_Clamp
 #endif
 
 
-#if defined(_T2M_TEXTURE_SAMPLE_TYPE_ARRAY)
+    //Layer Count/////////////////////////////////////////////////////////////////////////////
+    int _T2M_Layer_Count;
+
+    //Holes///////////////////////////////////////////////////////////////////////////////////
+    #if defined(_ALPHATEST_ON)
+        TEXTURE2D(_T2M_HolesMap); 
+        T2M_DECLARE_SAMPLER_STATE(sampler_T2M_HolesMap)
+    #endif
+
+
+    //Height Blend
+    float _T2M_HeightTransition;
+
      
-    UNITY_DECLARE_TEX2DARRAY(_T2M_SplatMaps2DArray);     
-    UNITY_DECLARE_TEX2DARRAY(_T2M_DiffuseMaps2DArray);   
-    UNITY_DECLARE_TEX2DARRAY(_T2M_NormalMaps2DArray);    
-    UNITY_DECLARE_TEX2DARRAY(_T2M_MaskMaps2DArray);      
+    #if defined(_T2M_TEXTURE_SAMPLE_TYPE_ARRAY)
+     
+        TEXTURE2D_ARRAY(_T2M_SplatMaps2DArray);     SAMPLER(sampler_T2M_SplatMaps2DArray);
+        TEXTURE2D_ARRAY(_T2M_DiffuseMaps2DArray);   SAMPLER(sampler_T2M_DiffuseMaps2DArray);
+        TEXTURE2D_ARRAY(_T2M_NormalMaps2DArray);    SAMPLER(sampler_T2M_NormalMaps2DArray);
+        TEXTURE2D_ARRAY(_T2M_MaskMaps2DArray);      SAMPLER(sampler_T2M_MaskMaps2DArray);
 
-    float4 _T2M_Layer_0_MapsUsage;
+    #else
 
-#else
+        //SamplerState
+        T2M_DECLARE_SAMPLER_STATE(sampler_T2M_SplatMap_0)
+        T2M_DECLARE_SAMPLER_STATE(sampler_T2M_Layer_0_Diffuse)
+        
+         
+        //Splatmaps///////////////////////////////////////////////////////////////////////////////
+        TEXTURE2D(_T2M_SplatMap_0); 
 
-    //Splatmaps///////////////////////////////////////////////////////////////////////////////
-    UNITY_DECLARE_TEX2D(_T2M_SplatMap_0); 
+        #if defined(RENDER_SPLATMAP_1)
+            TEXTURE2D(_T2M_SplatMap_1);
+        #endif 
 
-    #if defined(NEED_SPLAT_MAP_1)
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_T2M_SplatMap_1);
-    #endif
+        #if defined(RENDER_SPLATMAP_2)
+            TEXTURE2D(_T2M_SplatMap_2);
+        #endif
 
-    #if defined(NEED_SPLAT_MAP_2)
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_T2M_SplatMap_2);
-    #endif
-
-    #if defined(NEED_SPLAT_MAP_3)
-        UNITY_DECLARE_TEX2D_NOSAMPLER(_T2M_SplatMap_3);
-    #endif
+        #if defined(RENDER_SPLATMAP_3)
+            TEXTURE2D(_T2M_SplatMap_3);
+        #endif
 
 
-    //Layers//////////////////////////////////////////////////////////////////////////////////
-    UNITY_DECLARE_TEX2D(_T2M_Layer_0_Diffuse); 
-
-#endif
+        //Layers//////////////////////////////////////////////////////////////////////////////////
+        TEXTURE2D(_T2M_Layer_0_Diffuse); 
+        #if defined(_T2M_LAYER_0_NORMAL)
+            T2M_DECALRE_NORMAL(0)
+        #endif
+        #if defined(_T2M_LAYER_0_MASK) 
+            T2M_DECALRE_MASK(0)
+        #endif
 
     
-    float4 _T2M_Layer_0_uvScaleOffset;
-    float4 _T2M_Layer_0_ColorTint;
-    float4 _T2M_Layer_0_MetallicOcclusionSmoothness;
-    int _T2M_Layer_0_SmoothnessFromDiffuseAlpha;
-
-    #if defined(_T2M_LAYER_0_NORMAL)
-        T2M_DECALRE_NORMAL(0)
-    #endif
-    #if defined(_T2M_LAYER_0_MASK) 
-        T2M_DECALRE_MASK(0)
-    #endif
-
-    T2M_DECLARE_LAYER(1)
-    #if defined(_T2M_LAYER_1_NORMAL)
-        T2M_DECALRE_NORMAL(1)
-    #endif
-    #if defined(_T2M_LAYER_1_MASK) 
-        T2M_DECALRE_MASK(1)
-    #endif
-
-    T2M_DECLARE_LAYER(2)
-    #if defined(_T2M_LAYER_2_NORMAL)
-        T2M_DECALRE_NORMAL(2)
-    #endif
-    #if defined(_T2M_LAYER_2_MASK) 
-        T2M_DECALRE_MASK(2)
-    #endif
-
-    #ifdef NEED_PAINT_MAP_3
-        T2M_DECLARE_LAYER(3)
-        #if defined(_T2M_LAYER_3_NORMAL)
-            T2M_DECALRE_NORMAL(3)
+        TEXTURE2D(_T2M_Layer_1_Diffuse); 
+        #if defined(_T2M_LAYER_1_NORMAL)
+            T2M_DECALRE_NORMAL(1)
         #endif
-        #if defined(_T2M_LAYER_3_MASK) 
-            T2M_DECALRE_MASK(3)
+        #if defined(_T2M_LAYER_1_MASK) 
+            T2M_DECALRE_MASK(1)
         #endif
-    #endif
 
+        #ifdef RENDER_LAYER_2
+            TEXTURE2D(_T2M_Layer_2_Diffuse); 
+            #if defined(_T2M_LAYER_2_NORMAL)
+                T2M_DECALRE_NORMAL(2)
+            #endif
+            #if defined(_T2M_LAYER_2_MASK) 
+                T2M_DECALRE_MASK(2)
+            #endif
+        #endif
 
-    #if defined(NEED_SPLAT_MAP_1)
-        #ifdef NEED_PAINT_MAP_4
-            T2M_DECLARE_LAYER(4)
+        #ifdef RENDER_LAYER_3
+            TEXTURE2D(_T2M_Layer_3_Diffuse); 
+            #if defined(_T2M_LAYER_3_NORMAL)
+                T2M_DECALRE_NORMAL(3)
+            #endif
+            #if defined(_T2M_LAYER_3_MASK) 
+                T2M_DECALRE_MASK(3)
+            #endif
+        #endif
+
+        #ifdef RENDER_LAYER_4
+            TEXTURE2D(_T2M_Layer_4_Diffuse); 
             #if defined(_T2M_LAYER_4_NORMAL)
                 T2M_DECALRE_NORMAL(4)
             #endif
@@ -95,8 +103,8 @@ int _T2M_Layer_Count;
             #endif
         #endif
 
-        #ifdef NEED_PAINT_MAP_5
-            T2M_DECLARE_LAYER(5)
+        #ifdef RENDER_LAYER_5
+            TEXTURE2D(_T2M_Layer_5_Diffuse); 
             #if defined(_T2M_LAYER_5_NORMAL)
                 T2M_DECALRE_NORMAL(5)
             #endif
@@ -105,8 +113,8 @@ int _T2M_Layer_Count;
             #endif
         #endif
 
-        #ifdef NEED_PAINT_MAP_6
-            T2M_DECLARE_LAYER(6)
+        #ifdef RENDER_LAYER_6
+            TEXTURE2D(_T2M_Layer_6_Diffuse); 
             #if defined(_T2M_LAYER_6_NORMAL)
                 T2M_DECALRE_NORMAL(6)
             #endif
@@ -115,20 +123,18 @@ int _T2M_Layer_Count;
             #endif
         #endif
 
-        #ifdef NEED_PAINT_MAP_7
-            T2M_DECLARE_LAYER(7)
+        #ifdef RENDER_LAYER_7
+            TEXTURE2D(_T2M_Layer_7_Diffuse); 
             #if defined(_T2M_LAYER_7_NORMAL)
                 T2M_DECALRE_NORMAL(7)
             #endif
             #if defined(_T2M_LAYER_7_MASK) 
                 T2M_DECALRE_MASK(7)
             #endif
-        #endif        
-    #endif
+        #endif
 
-    #if defined(NEED_SPLAT_MAP_2)
-        #ifdef NEED_PAINT_MAP_8
-            T2M_DECLARE_LAYER(8)
+        #ifdef RENDER_LAYER_8
+            TEXTURE2D(_T2M_Layer_8_Diffuse); 
             #if defined(_T2M_LAYER_8_NORMAL)
                 T2M_DECALRE_NORMAL(8)
             #endif
@@ -137,8 +143,8 @@ int _T2M_Layer_Count;
             #endif
         #endif
 
-        #ifdef NEED_PAINT_MAP_9
-            T2M_DECLARE_LAYER(9)
+        #ifdef RENDER_LAYER_9
+            TEXTURE2D(_T2M_Layer_9_Diffuse); 
             #if defined(_T2M_LAYER_9_NORMAL)
                 T2M_DECALRE_NORMAL(9)
             #endif
@@ -147,8 +153,8 @@ int _T2M_Layer_Count;
             #endif
         #endif
 
-        #ifdef NEED_PAINT_MAP_10
-            T2M_DECLARE_LAYER(10)
+        #ifdef RENDER_LAYER_10
+            TEXTURE2D(_T2M_Layer_10_Diffuse); 
             #if defined(_T2M_LAYER_10_NORMAL)
                 T2M_DECALRE_NORMAL(10)
             #endif
@@ -157,8 +163,8 @@ int _T2M_Layer_Count;
             #endif
         #endif
 
-        #ifdef NEED_PAINT_MAP_11
-            T2M_DECLARE_LAYER(11)
+        #ifdef RENDER_LAYER_11
+            TEXTURE2D(_T2M_Layer_11_Diffuse); 
             #if defined(_T2M_LAYER_11_NORMAL)
                 T2M_DECALRE_NORMAL(11)
             #endif
@@ -166,11 +172,9 @@ int _T2M_Layer_Count;
                 T2M_DECALRE_MASK(11)
             #endif
         #endif
-    #endif
 
-    #if defined(NEED_SPLAT_MAP_3)
-        #ifdef NEED_PAINT_MAP_12
-            T2M_DECLARE_LAYER(12)
+        #ifdef RENDER_LAYER_12
+            TEXTURE2D(_T2M_Layer_12_Diffuse); 
             #if defined(_T2M_LAYER_12_NORMAL)
                 T2M_DECALRE_NORMAL(12)
             #endif
@@ -179,8 +183,8 @@ int _T2M_Layer_Count;
             #endif
         #endif
 
-        #ifdef NEED_PAINT_MAP_13
-            T2M_DECLARE_LAYER(13)
+        #ifdef RENDER_LAYER_13
+            TEXTURE2D(_T2M_Layer_13_Diffuse); 
             #if defined(_T2M_LAYER_13_NORMAL)
                 T2M_DECALRE_NORMAL(13)
             #endif
@@ -189,8 +193,8 @@ int _T2M_Layer_Count;
             #endif
         #endif
 
-        #ifdef NEED_PAINT_MAP_14
-            T2M_DECLARE_LAYER(14)
+        #ifdef RENDER_LAYER_14
+            TEXTURE2D(_T2M_Layer_14_Diffuse); 
             #if defined(_T2M_LAYER_14_NORMAL)
                 T2M_DECALRE_NORMAL(14)
             #endif
@@ -199,8 +203,8 @@ int _T2M_Layer_Count;
             #endif
         #endif
 
-        #ifdef NEED_PAINT_MAP_15
-            T2M_DECLARE_LAYER(15)
+        #ifdef RENDER_LAYER_15
+            TEXTURE2D(_T2M_Layer_15_Diffuse); 
             #if defined(_T2M_LAYER_15_NORMAL)
                 T2M_DECALRE_NORMAL(15)
             #endif
@@ -208,7 +212,8 @@ int _T2M_Layer_Count;
                 T2M_DECALRE_MASK(15)
             #endif
         #endif
+
     #endif
 
-#endif
- 
+
+#endif  //TERRAIN_TO_MESH_VARIABLES_CGINC

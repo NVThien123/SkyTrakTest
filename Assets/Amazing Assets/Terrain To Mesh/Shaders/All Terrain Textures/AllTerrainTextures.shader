@@ -339,7 +339,7 @@ Shader "Hidden/Amazing Assets/Terrain To Mesh/AllTerrainTextures"
 
 
 		return c;
-	} 
+	}
 
 	float4 fragBasemapMaskURP(v2f_img i) : SV_Target 
 	{

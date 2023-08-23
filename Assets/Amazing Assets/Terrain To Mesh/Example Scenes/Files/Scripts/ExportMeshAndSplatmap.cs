@@ -13,8 +13,14 @@ namespace AmazingAssets.TerrainToMesh.Example
         public int vertexCountVertical = 100;
 
         [Space(10)]
+        public bool enableHeightBasedBlend = false;
+        [Range(0f, 1f)]
+        public float heightTransition = 0;
+
+        [Space(10)]
         public bool exportHoles = false;
         public bool createFallbackTextures;
+
 
         void Start()
         {
@@ -33,7 +39,7 @@ namespace AmazingAssets.TerrainToMesh.Example
 
             //2. Export Splatmap material from terrain/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            Material splatmapMaterial = terrainData.TerrainToMesh().ExportSplatmapMaterial(exportHoles);
+            Material splatmapMaterial = terrainData.TerrainToMesh().ExportSplatmapMaterial(exportHoles, enableHeightBasedBlend, heightTransition);
 
             GetComponent<Renderer>().sharedMaterial = splatmapMaterial;
 
@@ -44,9 +50,11 @@ namespace AmazingAssets.TerrainToMesh.Example
 
             if (createFallbackTextures)
             {
-                Texture2D fallbackDiffuse = terrainData.TerrainToMesh().ExportBasemapDiffuseTexture(1024, exportHoles, false);
-                Texture2D fallbackNormal = terrainData.TerrainToMesh().ExportBasemapNormalTexture(1024, false);
+                Texture2D fallbackDiffuse = terrainData.TerrainToMesh().ExportBasemapDiffuseTexture(1024, exportHoles, false, enableHeightBasedBlend, heightTransition);  //Basemap's alpha channel contains holesmap, if 'exportHoles' is enabled
+                Texture2D fallbackNormal = terrainData.TerrainToMesh().ExportBasemapNormalTexture(1024, false, enableHeightBasedBlend, heightTransition);
 
+
+                //Depend on the used render pipeline, Unity's built-in Lit shader has different name for the '_MainTex' property
                 splatmapMaterial.SetTexture(Utilities.GetMaterailPropMainTex(), fallbackDiffuse);
                 splatmapMaterial.SetTexture(Utilities.GetMaterailPropBumpMap(), fallbackNormal);
             }

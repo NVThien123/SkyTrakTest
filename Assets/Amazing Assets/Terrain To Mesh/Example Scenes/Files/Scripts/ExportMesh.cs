@@ -13,6 +13,9 @@ namespace AmazingAssets.TerrainToMesh.Example
         public int vertexCountHorizontal = 100;
         public int vertexCountVertical = 100;
 
+        [Space(10)]
+        public Material material;
+
 
         void Start()
         {
@@ -20,18 +23,14 @@ namespace AmazingAssets.TerrainToMesh.Example
                 return;
 
 
-            //1. Export mesh from terrain////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //Export mesh from terrain////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
            
             Mesh terrainMesh = terrainData.TerrainToMesh().ExportMesh(vertexCountHorizontal, vertexCountVertical, TerrainToMesh.Normal.CalculateFromMesh);
 
             GetComponent<MeshFilter>().sharedMesh = terrainMesh;
 
 
-
-
-            //2. Assign material////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            Material material = new Material(Shader.Find("Standard"));
+            // Assing material
 
             GetComponent<Renderer>().sharedMaterial = material;
         }

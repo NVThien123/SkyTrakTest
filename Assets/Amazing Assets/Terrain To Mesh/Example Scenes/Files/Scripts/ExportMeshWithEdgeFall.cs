@@ -17,6 +17,9 @@ namespace AmazingAssets.TerrainToMesh.Example
         public EdgeFall edgeFall = new EdgeFall(0, true);
         public Texture2D edgeFallTexture;
 
+        [Space(10)]
+        public Shader defaultShader;
+
 
         void Start()
         {
@@ -24,7 +27,7 @@ namespace AmazingAssets.TerrainToMesh.Example
                 return;
 
 
-            //1. Export mesh with edge fall/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //Export mesh with edge fall/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             Mesh terrainMesh = terrainData.TerrainToMesh().ExportMesh(vertexCountHorizontal, vertexCountVertical, TerrainToMesh.Normal.CalculateFromMesh, edgeFall);
 
@@ -34,11 +37,11 @@ namespace AmazingAssets.TerrainToMesh.Example
 
 
             //2. Create materials////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                     
+            Material meshMaterial = new Material(defaultShader);        //Material for the main mesh 
 
-            Material meshMaterial = new Material(Shader.Find("Standard"));      //Material for the main mesh 
-
-            Material edgeFallMaterial = new Material(Shader.Find("Standard"));  //Material for the edge fall (saved in sub-mesh)
-            edgeFallMaterial.SetTexture("_MainTex", edgeFallTexture);           //Prop name is defined inside shader
+            Material edgeFallMaterial = new Material(defaultShader);    //Material for the edge fall (saved in the sub-mesh)
+            edgeFallMaterial.SetTexture("_MainTex", edgeFallTexture);   //Prop name is defined inside used shader
 
 
             GetComponent<Renderer>().sharedMaterials = new Material[] { meshMaterial, edgeFallMaterial };

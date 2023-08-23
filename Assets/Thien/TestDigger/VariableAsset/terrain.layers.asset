@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c373f5e8d051fcf449b5abce4e5adc37, type: 3}
+  m_Name: terrain.layers
+  m_EditorClassIdentifier: 
+  terrainLayers:
+  - {fileID: 8574412962073106934, guid: 820e8cc2959ea4b9bb7074b40626a380, type: 2}
+  - {fileID: 8574412962073106934, guid: 0ff0aa81c603f4b4d83802ea5dc1af0d, type: 2}
+  - {fileID: 8574412962073106934, guid: 242e5ae4b82a04e1f9808890b60459dd, type: 2}
+  - {fileID: 8574412962073106934, guid: c6cf00f84d10447088f2ae087820525e, type: 2}
+  - {fileID: 8574412962073106934, guid: d02a76a9781204fd99793d6883debd6f, type: 2}
+  - {fileID: 8574412962073106934, guid: ce833e94f7f7eea468b012546444cf0c, type: 2}
+  - {fileID: 8574412962073106934, guid: e3125fc5d002d4171980ce5fbf87693b, type: 2}
+  - {fileID: 8574412962073106934, guid: 853cabcdad2e74e9f8932b7d16f81c84, type: 2}

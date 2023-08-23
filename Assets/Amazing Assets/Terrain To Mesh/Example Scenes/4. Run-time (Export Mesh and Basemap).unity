@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 36e6a6707799c384ca1647565b20319a,
+  m_LightingSettings: {fileID: 4890085278179872738, guid: d5237e2cf0aa86541ac19197e416743d,
     type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -219,6 +219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 290814967}
   - component: {fileID: 290814966}
+  - component: {fileID: 290814968}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -303,6 +304,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 30.105001, y: 87.624, z: 2.216}
+--- !u!114 &290814968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290814965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &1018338256
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,8 +358,14 @@ MonoBehaviour:
   terrainData: {fileID: 15600000, guid: 8a90484bc7dde0d4198651a9d2d9e227, type: 2}
   vertexCountHorizontal: 250
   vertexCountVertical: 250
+  enableHeightBasedBlend: 0
+  heightTransition: 0
   exportHoles: 0
   mapsResolution: 1024
+  defaultShader: {fileID: -6465566751694194690, guid: 966a60476873dc2459e22ea619a0bff5,
+    type: 3}
+  cutoutShader: {fileID: -6465566751694194690, guid: 7a2b33378844c3b46935be0ea5537877,
+    type: 3}
 --- !u!23 &1018338258
 MeshRenderer:
   m_ObjectHideFlags: 0

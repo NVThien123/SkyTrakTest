@@ -39,12 +39,14 @@ namespace Digger
             }
         }
 
+        private Ray _ray;
         private void Update()
         {
             if (Input.GetMouseButton(0)) 
             {
                 // Perform a raycast to find terrain surface and call Modify method of DiggerMasterRuntime to edit it
-                if (Physics.Raycast(transform.position, transform.forward, out var hit, 2000f)) {
+                _ray = _camera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(_ray, out var hit, 2000f)) {
                     if (editAsynchronously) {
                         diggerMasterRuntime.ModifyAsyncBuffured(hit.point, brush, action, textureIndex, opacity, size);
                     } else {

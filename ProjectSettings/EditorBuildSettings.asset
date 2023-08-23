@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Digger/Demo/Runtime Scene/runtime-scene.unity
+    guid: 1d35b98b087dfa943b9356ebdf56641d
   m_configObjects: {}

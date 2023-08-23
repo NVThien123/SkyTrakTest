@@ -11,6 +11,10 @@ namespace AmazingAssets.TerrainToMesh.Example
         public int vertexCountHorizontal = 100;
         public int vertexCountVertical = 100;
 
+        [Space(10)]
+        public Material material;
+
+
         void Start()
         {
             if (terrainData == null)
@@ -26,9 +30,7 @@ namespace AmazingAssets.TerrainToMesh.Example
 
 
 
-            //2. Create material////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            Material material = new Material(Shader.Find("Standard"));
+            //2. Assign material////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             GetComponent<Renderer>().sharedMaterial = material;
 

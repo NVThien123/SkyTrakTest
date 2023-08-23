@@ -24,9 +24,9 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 3
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 0}
+  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -37,8 +37,8 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_Sun: {fileID: 290814966}
+  m_IndirectSpecularColor: {r: 0.18386942, g: 0.22902952, b: 0.30319262, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 36e6a6707799c384ca1647565b20319a,
+  m_LightingSettings: {fileID: 4890085278179872738, guid: d5237e2cf0aa86541ac19197e416743d,
     type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -243,10 +243,16 @@ MonoBehaviour:
   terrainData: {fileID: 15600000, guid: 8a90484bc7dde0d4198651a9d2d9e227, type: 2}
   vertexCountHorizontal: 100
   vertexCountVertical: 100
+  enableHeightBasedBlend: 0
+  heightTransition: 0
   exportHoles: 0
   mapsResolution: 256
   positionX: 3
   positionY: 2
+  defaultShader: {fileID: -6465566751694194690, guid: 966a60476873dc2459e22ea619a0bff5,
+    type: 3}
+  cutoutShader: {fileID: -6465566751694194690, guid: 7a2b33378844c3b46935be0ea5537877,
+    type: 3}
 --- !u!23 &278165073
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -322,6 +328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 290814967}
   - component: {fileID: 290814966}
+  - component: {fileID: 290814968}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -406,6 +413,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 30.105001, y: 87.624, z: 2.216}
+--- !u!114 &290814968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290814965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &325912569
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,10 +467,16 @@ MonoBehaviour:
   terrainData: {fileID: 15600000, guid: 8a90484bc7dde0d4198651a9d2d9e227, type: 2}
   vertexCountHorizontal: 100
   vertexCountVertical: 100
+  enableHeightBasedBlend: 0
+  heightTransition: 0
   exportHoles: 0
   mapsResolution: 256
   positionX: 0
   positionY: 3
+  defaultShader: {fileID: -6465566751694194690, guid: 966a60476873dc2459e22ea619a0bff5,
+    type: 3}
+  cutoutShader: {fileID: -6465566751694194690, guid: 7a2b33378844c3b46935be0ea5537877,
+    type: 3}
 --- !u!23 &325912571
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -543,10 +576,16 @@ MonoBehaviour:
   terrainData: {fileID: 15600000, guid: 8a90484bc7dde0d4198651a9d2d9e227, type: 2}
   vertexCountHorizontal: 100
   vertexCountVertical: 100
+  enableHeightBasedBlend: 0
+  heightTransition: 0
   exportHoles: 0
   mapsResolution: 256
   positionX: 1
   positionY: 3
+  defaultShader: {fileID: -6465566751694194690, guid: 966a60476873dc2459e22ea619a0bff5,
+    type: 3}
+  cutoutShader: {fileID: -6465566751694194690, guid: 7a2b33378844c3b46935be0ea5537877,
+    type: 3}
 --- !u!23 &343685374
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -646,10 +685,16 @@ MonoBehaviour:
   terrainData: {fileID: 15600000, guid: 8a90484bc7dde0d4198651a9d2d9e227, type: 2}
   vertexCountHorizontal: 100
   vertexCountVertical: 100
+  enableHeightBasedBlend: 0
+  heightTransition: 0
   exportHoles: 0
   mapsResolution: 256
   positionX: 2
   positionY: 3
+  defaultShader: {fileID: -6465566751694194690, guid: 966a60476873dc2459e22ea619a0bff5,
+    type: 3}
+  cutoutShader: {fileID: -6465566751694194690, guid: 7a2b33378844c3b46935be0ea5537877,
+    type: 3}
 --- !u!23 &348317498
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -749,10 +794,16 @@ MonoBehaviour:
   terrainData: {fileID: 15600000, guid: 8a90484bc7dde0d4198651a9d2d9e227, type: 2}
   vertexCountHorizontal: 100
   vertexCountVertical: 100
+  enableHeightBasedBlend: 0
+  heightTransition: 0
   exportHoles: 0
   mapsResolution: 256
   positionX: 1
   positionY: 0
+  defaultShader: {fileID: -6465566751694194690, guid: 966a60476873dc2459e22ea619a0bff5,
+    type: 3}
+  cutoutShader: {fileID: -6465566751694194690, guid: 7a2b33378844c3b46935be0ea5537877,
+    type: 3}
 --- !u!23 &447872563
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -914,10 +965,16 @@ MonoBehaviour:
   terrainData: {fileID: 15600000, guid: 8a90484bc7dde0d4198651a9d2d9e227, type: 2}
   vertexCountHorizontal: 100
   vertexCountVertical: 100
+  enableHeightBasedBlend: 0
+  heightTransition: 0
   exportHoles: 0
   mapsResolution: 256
   positionX: 1
   positionY: 1
+  defaultShader: {fileID: -6465566751694194690, guid: 966a60476873dc2459e22ea619a0bff5,
+    type: 3}
+  cutoutShader: {fileID: -6465566751694194690, guid: 7a2b33378844c3b46935be0ea5537877,
+    type: 3}
 --- !u!23 &783154615
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1017,10 +1074,16 @@ MonoBehaviour:
   terrainData: {fileID: 15600000, guid: 8a90484bc7dde0d4198651a9d2d9e227, type: 2}
   vertexCountHorizontal: 100
   vertexCountVertical: 100
+  enableHeightBasedBlend: 0
+  heightTransition: 0
   exportHoles: 0
   mapsResolution: 256
   positionX: 0
   positionY: 0
+  defaultShader: {fileID: -6465566751694194690, guid: 966a60476873dc2459e22ea619a0bff5,
+    type: 3}
+  cutoutShader: {fileID: -6465566751694194690, guid: 7a2b33378844c3b46935be0ea5537877,
+    type: 3}
 --- !u!23 &1018338258
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1120,10 +1183,16 @@ MonoBehaviour:
   terrainData: {fileID: 15600000, guid: 8a90484bc7dde0d4198651a9d2d9e227, type: 2}
   vertexCountHorizontal: 100
   vertexCountVertical: 100
+  enableHeightBasedBlend: 0
+  heightTransition: 0
   exportHoles: 0
   mapsResolution: 256
   positionX: 2
   positionY: 1
+  defaultShader: {fileID: -6465566751694194690, guid: 966a60476873dc2459e22ea619a0bff5,
+    type: 3}
+  cutoutShader: {fileID: -6465566751694194690, guid: 7a2b33378844c3b46935be0ea5537877,
+    type: 3}
 --- !u!23 &1019389371
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1223,10 +1292,16 @@ MonoBehaviour:
   terrainData: {fileID: 15600000, guid: 8a90484bc7dde0d4198651a9d2d9e227, type: 2}
   vertexCountHorizontal: 100
   vertexCountVertical: 100
+  enableHeightBasedBlend: 0
+  heightTransition: 0
   exportHoles: 0
   mapsResolution: 256
   positionX: 3
   positionY: 3
+  defaultShader: {fileID: -6465566751694194690, guid: 966a60476873dc2459e22ea619a0bff5,
+    type: 3}
+  cutoutShader: {fileID: -6465566751694194690, guid: 7a2b33378844c3b46935be0ea5537877,
+    type: 3}
 --- !u!23 &1028849071
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1326,10 +1401,16 @@ MonoBehaviour:
   terrainData: {fileID: 15600000, guid: 8a90484bc7dde0d4198651a9d2d9e227, type: 2}
   vertexCountHorizontal: 100
   vertexCountVertical: 100
+  enableHeightBasedBlend: 0
+  heightTransition: 0
   exportHoles: 0
   mapsResolution: 256
   positionX: 0
   positionY: 1
+  defaultShader: {fileID: -6465566751694194690, guid: 966a60476873dc2459e22ea619a0bff5,
+    type: 3}
+  cutoutShader: {fileID: -6465566751694194690, guid: 7a2b33378844c3b46935be0ea5537877,
+    type: 3}
 --- !u!23 &1276532755
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1429,10 +1510,16 @@ MonoBehaviour:
   terrainData: {fileID: 15600000, guid: 8a90484bc7dde0d4198651a9d2d9e227, type: 2}
   vertexCountHorizontal: 100
   vertexCountVertical: 100
+  enableHeightBasedBlend: 0
+  heightTransition: 0
   exportHoles: 0
   mapsResolution: 256
   positionX: 3
   positionY: 0
+  defaultShader: {fileID: -6465566751694194690, guid: 966a60476873dc2459e22ea619a0bff5,
+    type: 3}
+  cutoutShader: {fileID: -6465566751694194690, guid: 7a2b33378844c3b46935be0ea5537877,
+    type: 3}
 --- !u!23 &1318036132
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1563,10 +1650,16 @@ MonoBehaviour:
   terrainData: {fileID: 15600000, guid: 8a90484bc7dde0d4198651a9d2d9e227, type: 2}
   vertexCountHorizontal: 100
   vertexCountVertical: 100
+  enableHeightBasedBlend: 0
+  heightTransition: 0
   exportHoles: 0
   mapsResolution: 256
   positionX: 2
   positionY: 0
+  defaultShader: {fileID: -6465566751694194690, guid: 966a60476873dc2459e22ea619a0bff5,
+    type: 3}
+  cutoutShader: {fileID: -6465566751694194690, guid: 7a2b33378844c3b46935be0ea5537877,
+    type: 3}
 --- !u!23 &1398393974
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1666,10 +1759,16 @@ MonoBehaviour:
   terrainData: {fileID: 15600000, guid: 8a90484bc7dde0d4198651a9d2d9e227, type: 2}
   vertexCountHorizontal: 100
   vertexCountVertical: 100
+  enableHeightBasedBlend: 0
+  heightTransition: 0
   exportHoles: 0
   mapsResolution: 256
   positionX: 1
   positionY: 2
+  defaultShader: {fileID: -6465566751694194690, guid: 966a60476873dc2459e22ea619a0bff5,
+    type: 3}
+  cutoutShader: {fileID: -6465566751694194690, guid: 7a2b33378844c3b46935be0ea5537877,
+    type: 3}
 --- !u!23 &1408068630
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1769,10 +1868,16 @@ MonoBehaviour:
   terrainData: {fileID: 15600000, guid: 8a90484bc7dde0d4198651a9d2d9e227, type: 2}
   vertexCountHorizontal: 100
   vertexCountVertical: 100
+  enableHeightBasedBlend: 0
+  heightTransition: 0
   exportHoles: 0
   mapsResolution: 256
   positionX: 2
   positionY: 2
+  defaultShader: {fileID: -6465566751694194690, guid: 966a60476873dc2459e22ea619a0bff5,
+    type: 3}
+  cutoutShader: {fileID: -6465566751694194690, guid: 7a2b33378844c3b46935be0ea5537877,
+    type: 3}
 --- !u!23 &1440309178
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1903,10 +2008,16 @@ MonoBehaviour:
   terrainData: {fileID: 15600000, guid: 8a90484bc7dde0d4198651a9d2d9e227, type: 2}
   vertexCountHorizontal: 100
   vertexCountVertical: 100
+  enableHeightBasedBlend: 0
+  heightTransition: 0
   exportHoles: 0
   mapsResolution: 256
   positionX: 0
   positionY: 2
+  defaultShader: {fileID: -6465566751694194690, guid: 966a60476873dc2459e22ea619a0bff5,
+    type: 3}
+  cutoutShader: {fileID: -6465566751694194690, guid: 7a2b33378844c3b46935be0ea5537877,
+    type: 3}
 --- !u!23 &1681149738
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2191,10 +2302,16 @@ MonoBehaviour:
   terrainData: {fileID: 15600000, guid: 8a90484bc7dde0d4198651a9d2d9e227, type: 2}
   vertexCountHorizontal: 100
   vertexCountVertical: 100
+  enableHeightBasedBlend: 0
+  heightTransition: 0
   exportHoles: 0
   mapsResolution: 256
   positionX: 3
   positionY: 1
+  defaultShader: {fileID: -6465566751694194690, guid: 966a60476873dc2459e22ea619a0bff5,
+    type: 3}
+  cutoutShader: {fileID: -6465566751694194690, guid: 7a2b33378844c3b46935be0ea5537877,
+    type: 3}
 --- !u!23 &2124003427
 MeshRenderer:
   m_ObjectHideFlags: 0
