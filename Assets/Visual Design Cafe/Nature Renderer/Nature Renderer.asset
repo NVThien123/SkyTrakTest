@@ -15,7 +15,7 @@ MonoBehaviour:
   _displayName: Nature Renderer 2020
   _description: 
   _version:
-    _bundleIdentifier: com.vdc.nature-renderer.hdrp.uas
+    _bundleIdentifier: com.vdc.nature-renderer.urp.uas
     _versionNumber: 1.6.1
     _buildNumber: 109
   _downloadInBackground: 1
